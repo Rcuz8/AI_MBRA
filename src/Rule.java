@@ -1,29 +1,18 @@
 public class Rule {
 
-    Tuple<Boolean> values;
+    State val;
 
     Action action;
 
-    public Rule(Tuple<Boolean> values, Action action) {
-        this.values = values;
+    public Rule(State val, Action action) {
+        this.val = val;
         this.action = action;
     }
 
-    public Tuple<Boolean> getValues() {
-        return values;
+    boolean check(State a_state) {
+        return val.equals(a_state);
     }
 
-    public void setValues(Tuple<Boolean> values) {
-        this.values = values;
-    }
-
-    public Action getAction() {
-        return action;
-    }
-
-    public void setAction(Action action) {
-        this.action = action;
-    }
 }
 
 

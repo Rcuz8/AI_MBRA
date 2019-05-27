@@ -24,7 +24,12 @@ public class MBRA {
         return action;
     }
 
+//    boolean gotBurned(State prev_state) {
+//        if (prev_state.get().equals(Percept.first_10.toString()))
+//    }
+
     State UPDATE_STATE(State s, Action a, Percept p, List<Rule> rules) {
+
         return new State("idkk");
     }
 
