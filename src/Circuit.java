@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Circuit {
@@ -38,6 +39,26 @@ public class Circuit {
             outs.add(gates.get(i).evaluate());
         }
         return outs;
+    }
+
+    public static Circuit new_Circuit_nonnullObject(Object o) {
+        List<Boolean> inputs =  new LinkedList<Boolean>();
+        Boolean i1 = new Boolean(o == null);
+        inputs.add(i1);
+
+        List<Gate> gates = new LinkedList<>();
+        Gate g4 = new Gate_NOT();
+
+        gates.add(g4);
+
+        List<Integer> outs = new LinkedList<>();
+        outs.add(0);
+
+        Circuit c = new Circuit(inputs,gates,outs);
+
+        c.conn(i1,g4,0);
+
+        return c;
     }
 
 

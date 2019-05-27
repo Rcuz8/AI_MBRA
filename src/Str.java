@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 
 public class Str {
@@ -69,6 +70,15 @@ public class Str {
             sum+=i;
         }
         return sum;
+    }
+
+    static Str from_list(List<String> str_list, String tokenizer) {
+        Str s = new Str("");
+        for (String str:str_list) {
+            s.a(str);
+            if (tokenizer != null && !str.equals(str_list.get(str_list.size()-1)))  s.a(tokenizer);
+        }
+        return s;
     }
 
 }

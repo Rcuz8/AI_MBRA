@@ -21,8 +21,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
-
+    public static void test_circuit() {
         List<Boolean> inputs =  new LinkedList<Boolean>();
         Boolean i1 = new Boolean(true);
         Boolean i2 = new Boolean(true);
@@ -52,8 +51,13 @@ public class Main {
         c.conn_out_to_in(g2,g3,0);
         c.conn_out_to_in(g3,g4,0);
 
-        Pr.pr(c.evaluate());
+        List<Boolean> l = c.evaluate();
 
+        Pr.prArr(l);
+    }
+
+    public static void main(String[] args) {
+        new VacEnvironment().run_for_n_iterations(10);
     }
 
 
