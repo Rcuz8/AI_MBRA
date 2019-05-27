@@ -4,6 +4,10 @@ public class Gate_AND extends Gate {
         super(a,b);
     }
 
+    public Gate_AND() {
+        super();
+    }
+
     @Override
     public Boolean evaluate() {
         return super.a && super.b;

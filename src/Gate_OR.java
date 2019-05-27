@@ -4,6 +4,10 @@ public class Gate_OR extends Gate {
         super(a,b);
     }
 
+    public Gate_OR() {
+        super();
+    }
+
     @Override
     public Boolean evaluate() {
         return super.a || super.b;

@@ -20,6 +20,7 @@ public class Str {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
         while (length > 0) {
             s.a(AlphaNumericString.charAt(new Random().nextInt(AlphaNumericString.length())));
+            length--;
         }
         return s;
     }

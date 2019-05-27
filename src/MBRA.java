@@ -35,7 +35,7 @@ public class MBRA {
 
     Rule RULE_MATCH(State state, List<Rule> rules) {
         /* if state is ... , do ...    */
-        return new Rule(new Tuple<Boolean>(true,false),Action.Blitz);
+        return new Rule(new State("idkk"),Action.Blitz);
     }
 
 }

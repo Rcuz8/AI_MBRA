@@ -1,7 +1,11 @@
 public class Gate_NOT extends Gate {
 
     public Gate_NOT(Boolean a) {
-        super(a,null);
+        super(a,false);
+    }
+
+    public Gate_NOT() {
+        super();
     }
 
     @Override
