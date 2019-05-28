@@ -1,15 +1,24 @@
-public class Gate_OR extends Gate {
+public class Gate_OR<T> extends Gate<T> {
 
-    public Gate_OR(Boolean a, Boolean b) {
+    T c;
+
+    public Gate_OR(T a, T b, T c) {
         super(a,b);
+        this.c = c;
     }
 
-    public Gate_OR() {
-        super();
+    public Gate_OR(T c) {
+        super(null,null );
+        this.c = c;
     }
+
+    boolean exists(T t) { return (t != null); }
 
     @Override
-    public Boolean evaluate() {
-        return super.a || super.b;
+    public T evaluate() {
+        if (exists(super.a) || exists(super.b)) {
+            return c;
+        }
+        return null;
     }
 }

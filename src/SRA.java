@@ -1,36 +1,57 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.util.LinkedList;
 import java.util.List;
 
-public class SRA {
+public abstract class SRA<A> {
 
+    // One list per input
+    Table<String> percepts_table;
 
     /*
-        Persistent
+        "Persistent"
      */
 
-    State state;
+    List<Rule<A>> rules;
 
-    Action action;
+    SRA(Table<String> percepts_table, List<Rule<A>> rules) {
+        this.percepts_table = percepts_table;
+        this.rules = rules;
+    }
 
-    List<Rule> rules; // Checks states
+    // For initialization later
+    SRA() {
+        this.percepts_table = null;
+        this.rules = null;
+    }
 
-    Action MODEL_BASED_REFLEX_AGENT(Percept percept) {
-        state = UPDATE_STATE(state,action,percept,rules);
-        Rule rule = RULE_MATCH(state,rules);
-        action = rule.action;
+    A SIMPLE_REFLEX_AGENT(List<Integer> percepts) {
+        State state = INTERPRET_INPUT(percepts);
+        Rule<A> rule = RULE_MATCH(state,rules);
+        A action = rule != null ? ((A) rule.action) : null;
         return action;
     }
 
-//    boolean gotBurned(State prev_state) {
-//        if (prev_state.get().equals(Percept.first_10.toString()))
-//    }
+    /*
+        Generate abstract representation of state
+     */
 
-    State UPDATE_STATE(State s, Action a, Percept p, List<Rule> rules) {
-
-        return new State("idkk");
+    protected State INTERPRET_INPUT(List<Integer> percepts) {
+        Str val = new Str("");
+        int row = 0;
+        for (Integer perc:percepts) {
+            val.a(percepts_table.get(row,perc));
+            row++;
+        }
+        // concatenate all percept factors to one state value
+        return new State(val.stringVal());
     }
 
-    Rule RULE_MATCH(State state, List<Rule> rules) {
-        /* if state is ... , do ...    */
-        return new Rule(new State("idkk"),Action.Blitz);
+    protected Rule RULE_MATCH(State state, List<Rule<A>> rules) {
+        for (Rule rule: rules) {
+            if (rule.check(state)) return rule;
+        }
+        return null;
     }
+
 }

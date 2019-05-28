@@ -65,6 +65,15 @@ public class Table<E> {
             lol.get(i).set(j, data);
     }
 
+    public void setList(int i, LinkedList data) {
+        if (lol.size() <= i)
+            return; // check height
+        if (lol.get(i).size() != data.size())
+            return; // check width
+
+        lol.set(i, data);
+    }
+
     public E get(int i, int j) {
         if (i < 0 || j < 0) return null;
         if (lol.size() <= i) return null; // check height

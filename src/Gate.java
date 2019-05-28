@@ -1,16 +1,16 @@
-public abstract class Gate {
+public abstract class Gate<T> {
 
-    public Boolean a;
-    public Boolean b;
+    public T a;
+    public T b;
     public Str id;
 
-    public Gate(Boolean a, Boolean b) {
+    public Gate(T a, T b) {
         this.a = a;
         this.b = b;
         id = Str.randomized(10);
     }
 
-    public Gate() { this.a = false;this.b = false; this.id = Str.randomized(10); }
+//    public Gate() { this.a = false;this.b = false; this.id = Str.randomized(10); }
 
     @Override
     public boolean equals(Object obj) {
@@ -21,6 +21,6 @@ public abstract class Gate {
         return ((Gate) obj).id.stringVal().equals(this.id.stringVal());
     }
 
-    public abstract Boolean evaluate();
+    public abstract T evaluate();
 
 }

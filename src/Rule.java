@@ -1,10 +1,10 @@
-public class Rule {
+public class Rule<A> {
 
     State val;
 
-    Action action;
+    A action;
 
-    public Rule(State val, Action action) {
+    public Rule(State val, A action) {
         this.val = val;
         this.action = action;
     }
@@ -12,7 +12,7 @@ public class Rule {
     boolean check(State a_state) {
         return val.equals(a_state);
     }
-
 }
+
 
 

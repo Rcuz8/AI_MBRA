@@ -4,44 +4,82 @@ import java.util.Random;
 
 public class VacEnvironment {
 
-    Vac_SRA_ex vac;
+    Vac_SRA vac;
 
     public VacEnvironment() {
-        vac = new Vac_SRA_ex();
+        vac = new Vac_SRA();
     }
 
-    public Perc generateVacuumPercept(VacLoc lastLoc) {
-        List<String> list = new LinkedList<>();
-        String isDirty = (new Random().nextInt() < 0.5 ? "clean" : "dirty");
-        list.add(lastLoc.toString());
-        list.add(isDirty);
-        return new Perc(list);
+    public List<Integer> generateVacuumPercept(int lastLoc) {
+        List<Integer> list = new LinkedList<>();
+        int isClean = (new Random().nextInt() < 0.5 ? 0 : 1);
+        list.add(lastLoc);
+        list.add(isClean);
+        return list;
     }
 
-//    public LinkedList<Perc> percsList(int n) {
-//        List<String> list = new LinkedList<>();
-//        VacLoc initialLoc
-//        while (n > 0) {
-//            list.add(generateVacuumPercept())
-//        }
-//    }
-
-    VacLoc moved(VacLoc prev, VacAction action) {
-        if (prev == VacLoc.A && action == VacAction.Right) return VacLoc.B;
-        if (prev == VacLoc.B && action == VacAction.Left) return VacLoc.A;
-//        if (action == VacAction.None || action == VacAction.Suck) return prev;
+    int moved(int prev, VacAction action) {
+        if (prev == 0 && action == VacAction.Right) return 1;
+        if (prev == 1 && action == VacAction.Left) return 0;
         return prev;
     }
 
     public void run_for_n_iterations(int n) {
-        VacLoc loc = VacLoc.A;
+        int loc = 0; // A
         while (n >  0) {
-            Perc percept = generateVacuumPercept(loc);
+            List<Integer> percept = generateVacuumPercept(loc);
             VacAction action = vac.REFLEX_VAC_AGENT(percept);
-            Pr.pr("{ " + loc.toString() + ", " + percept.strVal.stringVal().substring(1) + "}" + " => " + action.toString());
+            Pr.pr("{ " + (percept.get(0) == 0 ? "A" : "B") + ", " + (percept.get(1) == 0 ? "CLEAN" : "DIRTY") + " }" + " => " + action.toString());
             loc = moved(loc,action);
             n--;
         }
     }
 
 }
+
+/*
+    Percept
+ */
+
+//enum VacLoc {
+//    A,
+//    B,
+//    String;
+//
+//    @Override
+//    public java.lang.String toString() {
+//        if (this == VacLoc.A) return "A";
+//        if (this == VacLoc.B) return "B";
+//        return "null";
+//    }
+//}
+
+//enum VacClean {
+//    clean,
+//    dirty,
+//    String;
+//
+//    @Override
+//    public java.lang.String toString() {
+//        if (this == VacClean.clean) return "clean";
+//        if (this == VacClean.dirty) return "dirty";
+//        return "null";
+//    }
+//}
+
+//enum VacStates {
+//    Aclean,
+//    Adirty,
+//    Bclean,
+//    Bdirty,
+//    String;
+//
+//    @Override
+//    public java.lang.String toString() {
+//        if (this == VacStates.Aclean) return "Aclean";
+//        if (this == VacStates.Adirty) return "Adirty";
+//        if (this == VacStates.Bclean) return "Bclean";
+//        if (this == VacStates.Bdirty) return "Bdirty";
+//        return "null";
+//    }
+//}
